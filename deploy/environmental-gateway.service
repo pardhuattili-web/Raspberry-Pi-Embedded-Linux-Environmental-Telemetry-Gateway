@@ -1,0 +1,17 @@
+[Unit]
+Description=Raspberry Pi Environmental Telemetry Gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/environmental-gateway
+ExecStart=/opt/environmental-gateway/.venv/bin/python -m gateway.main --config /opt/environmental-gateway/config/gateway.json
+Restart=on-failure
+RestartSec=5
+User=pi
+Group=pi
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
